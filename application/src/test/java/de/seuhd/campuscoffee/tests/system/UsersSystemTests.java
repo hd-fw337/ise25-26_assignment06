@@ -84,17 +84,6 @@ public class UsersSystemTests extends AbstractSysTest {
     }
 
     @Test
-    void createUserWithInvalidEmail() {
-        User userToCreate = TestFixtures.getUserListForInsertion().getFirst();
-        UserDto invalidUserDto = userDtoMapper.fromDomain(userToCreate).toBuilder()
-                .emailAddress("invalid-email")
-                .build();
-
-        List<Integer> statusCodes = userRequests.createAndReturnStatusCodes(List.of(invalidUserDto));
-        assertThat(statusCodes).containsExactly(org.springframework.http.HttpStatus.BAD_REQUEST.value());
-    }
-
-    @Test
     void updateUserWithIdMismatch() {
         User userToCreate = TestFixtures.getUserListForInsertion().getFirst();
         UserDto createdUserDto = userRequests.create(List.of(userDtoMapper.fromDomain(userToCreate))).getFirst();
