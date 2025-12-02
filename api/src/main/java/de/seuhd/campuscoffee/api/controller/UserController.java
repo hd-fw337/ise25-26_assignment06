@@ -8,6 +8,8 @@ import static de.seuhd.campuscoffee.api.util.ControllerUtils.getLocation;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> create(@RequestBody @Valid UserDto userDto) {
         UserDto createdUserDto = userDtoMapper.fromDomain(
                 userService.upsert(userDtoMapper.toDomain(userDto))
         );
@@ -57,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserDto userDto) {
         if (!id.equals(userDto.id())) {
             throw new IllegalArgumentException("User ID in path and body do not match.");
         }
