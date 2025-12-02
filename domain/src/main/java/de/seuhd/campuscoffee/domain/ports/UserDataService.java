@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jspecify.annotations.NonNull;
 
+import de.seuhd.campuscoffee.domain.exceptions.NotFoundException;
 import de.seuhd.campuscoffee.domain.model.User;
 
 /**
